@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgres:14
+    restart: always
+    container_name: db-container
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: kazikashika_db
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+      TZ: "Asia/Tokyo"
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./db/test_data.sql:/root/src/test_data.sql
